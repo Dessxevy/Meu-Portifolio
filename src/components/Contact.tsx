@@ -8,42 +8,41 @@ function Contact() {
   const formRef = useRef<HTMLFormElement | null>(null)
   const [loading, setLoading] = useState(false)
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    setLoading(true)
+ async function handleSubmit(e: FormEvent) {
+  e.preventDefault()
 
-    if (!formRef.current) return
+  if (!formRef.current) return
 
-    const formData = new FormData(formRef.current)
+  setLoading(true)
 
-    formData.append(
-      "access_key",
-      import.meta.env.VITE_WEB3FORMS_KEY
-    )
+  const formData = new FormData(formRef.current)
 
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      })
+  const key = import.meta.env.VITE_WEB3FORMS_KEY
+  console.log("KEY:", key)
 
-      const data = await res.json()
+  formData.append("access_key", key)
 
-      if (data.success) {
-        toast.success("Mensagem enviada com sucesso", {
-          description: "Vou te responder o quanto antes."
-        })
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    })
 
-        formRef.current.reset()
-      } else {
-        toast.error("Erro ao enviar mensagem")
-      }
-    } catch (err) {
-      toast.error("Erro de conexão")
-    } finally {
-      setLoading(false)
+    const data = await res.json()
+    console.log("RESPONSE:", data)
+
+    if (data.success) {
+      toast.success("Mensagem enviada com sucesso")
+      formRef.current.reset()
+    } else {
+      toast.error(data.message || "Erro ao enviar mensagem")
     }
+  } catch (err) {
+    toast.error("Erro de conexão")
+  } finally {
+    setLoading(false)
   }
+}
   return (
     <section
       id="contact"
