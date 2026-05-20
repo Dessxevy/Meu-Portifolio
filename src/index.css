@@ -1,0 +1,43 @@
+/* index.css */
+
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #1A1B1E;
+  overflow-x: hidden;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(60px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+* {
+  cursor: url('/cursor.png') 16 16, auto;
+}
+
+a,
+button {
+  cursor: url('/cursor.png') 16 16, pointer;
+}
