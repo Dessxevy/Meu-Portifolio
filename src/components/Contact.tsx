@@ -2,41 +2,48 @@ import { motion } from 'framer-motion'
 import { Mail, MapPin, Send, Loader2 } from 'lucide-react'
 import { useRef, useState } from 'react'
 import type { FormEvent } from "react"
-import emailjs from '@emailjs/browser'
 import { toast } from 'sonner'
 
 function Contact() {
   const formRef = useRef<HTMLFormElement | null>(null)
   const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    if (!formRef.current) return
-
     setLoading(true)
 
-    emailjs.sendForm(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      formRef.current!,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    )
-      .then(() => {
-        toast.success('Mensagem enviada com sucesso', {
-          description: 'Vou te responder o quanto antes.',
-        })
-        formRef.current?.reset()
-      })
-      .catch(() => {
-        toast.error('Erro ao enviar', {
-          description: 'Tente novamente em alguns instantes.',
-        })
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }
+    if (!formRef.current) return
 
+    const formData = new FormData(formRef.current)
+
+    formData.append(
+      "access_key",
+      import.meta.env.VITE_WEB3FORMS_KEY
+    )
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      })
+
+      const data = await res.json()
+
+      if (data.success) {
+        toast.success("Mensagem enviada com sucesso", {
+          description: "Vou te responder o quanto antes."
+        })
+
+        formRef.current.reset()
+      } else {
+        toast.error("Erro ao enviar mensagem")
+      }
+    } catch (err) {
+      toast.error("Erro de conexão")
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
     <section
       id="contact"
