@@ -281,19 +281,20 @@ function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="
-        flex
-        items-center
-        gap-3
-        px-7
-        py-4
-        rounded-2xl
-        bg-[#d6a1b1]
-        hover:bg-[#bd5a78]
-        transition
-        text-[#F6E7EB]
-        font-semibold
-        shadow-[0_0_30px_rgba(214,161,177,0.2)]
-      "
+                      flex
+                      items-center
+                      gap-3
+                      px-7
+                      py-4
+                      rounded-2xl
+                    border-[#d6a1b1]/20
+                    bg-[#d6a1b1]/80
+                      backdrop-blur-md
+                    hover:bg-[#bd5a78]/25
+                    text-[#F6E7EB]
+                      font-semibold
+                      shadow-[0_0_30px_rgba(214,161,177,0.2)]
+                      "
                     >
                       <ExternalLink size={18} />
                       Deploy

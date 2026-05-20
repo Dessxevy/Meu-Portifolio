@@ -143,7 +143,10 @@ function Contact() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 rounded-2xl bg-[#d6a1b1] hover:bg-[#bd5a78] disabled:opacity-60 transition text-[#F6E7EB] font-semibold flex items-center justify-center gap-3"
+              className="w-full py-4 rounded-2xl  border-[#d6a1b1]/20
+                    bg-[#d6a1b1]/80
+                      backdrop-blur-md
+                    hover:bg-[#bd5a78]/25 disabled:opacity-60 transition text-[#F6E7EB] font-semibold flex items-center justify-center gap-3"
             >
               {loading ? (
                 <>
