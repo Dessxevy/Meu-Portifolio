@@ -118,7 +118,7 @@ function Contact() {
           >
             <input
               type="text"
-              name="from_name"
+              name="name"
               placeholder="Seu nome"
               required
               className="w-full bg-white/5 border border-[#d6a1b1]/10 rounded-2xl px-6 py-4 text-[#F6E7EB]"
@@ -126,7 +126,7 @@ function Contact() {
 
             <input
               type="email"
-              name="from_email"
+              name="email"
               placeholder="Seu email"
               required
               className="w-full bg-white/5 border border-[#d6a1b1]/10 rounded-2xl px-6 py-4 text-[#F6E7EB]"
